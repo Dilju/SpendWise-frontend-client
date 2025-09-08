@@ -1,16 +1,15 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3050"
+const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3050";
 
 export const API = axios.create({
-    baseURL: BASE_URL,
-})
+  baseURL: BASE_URL,
+});
 
 API.interceptors.request.use((req) => {
-    const token = localStorage.getItem("token")
-
-    if(token){
-        req.headers.Authorization = `Bearer ${token}`
-    }
-    return req
-})
+  const token = localStorage.getItem("token");
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
+  return req;
+});
