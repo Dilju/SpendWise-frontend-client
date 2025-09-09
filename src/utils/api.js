@@ -1,4 +1,4 @@
-// client/utils/api.js
+// client/src/utils/api.js
 import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3050";
@@ -16,6 +16,3 @@ API.interceptors.request.use((req) => {
 });
 
 console.log("API Base URL 👉", BASE_URL);
-
-
-
