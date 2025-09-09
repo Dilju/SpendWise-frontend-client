@@ -18,7 +18,13 @@ export const Navbar = () => {
                 </nav>
 
                 {/* Logout */}
-                <button className="bg-white text-indigo-600 rounded-lg px-4 py-2 font-semibold hover:bg-gray-200" onClick={() => navigate("/login")}>Logout</button>
+                <button 
+                    className="bg-white text-indigo-600 rounded-lg px-4 py-2 font-semibold hover:bg-gray-200" 
+                    onClick={() =>{ 
+                        localStorage.removeItem("token")
+                        navigate("/login")}}
+                    >Logout
+                </button>
 
                 {/* Hamburger button */}
                 <button className="md:hidden text-2xl focus:outline-none" onClick={() => setIsOpen(!isOpen)}>☰</button>
