@@ -1,42 +1,115 @@
+
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 import { Footer } from "../components/Footer"
+
 export const Home = () => {
-    const navigate = useNavigate()
-    return(
-        <div className='font-sans bg-gray-100 text-gray-900'>
-      
-        {/* NavBar */}
-        <header className='bg-white shadow-md fixed top-0 w-full z-50'>
-            <div className='max-w-7xl mx-auto px-6 py-5 flex justify-between items-center'>
-            <h1 className='text-2xl font-bold text-indigo-600'>SpendWise</h1>
-            <nav className='space-x-9 text-lg font-ligh'>
-                <a href='#' className='hover:text-indigo-600 transition'>Home</a>
-                <a href='#features' className='hover:text-indigo-600 transition'>Features</a>
-                <a href='/login' className='hover:text-indigo-600 transition'>Login</a>
-                <a href='/signup' className='border-2 border-black px-4 py-2 rounded-lg 
-                hover:border-indigo-600 hover:text-white
-                hover:bg-indigo-600 transition
-                '>Sign Up</a>
-            </nav>
-            </div>
-        </header>
+  const navigate = useNavigate()
+  const [isOpen, setIsOpen] = useState(false)
 
+  return (
+    <div className="font-sans bg-gray-100 text-gray-900">
+      {/* NavBar */}
+      <header className="bg-white shadow-md fixed top-0 w-full z-50">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+          {/* Logo */}
+          <h1
+            className="text-2xl font-bold text-indigo-600 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            SpendWise
+          </h1>
 
-        {/* Hero section */}
-        <section className='bg-gray-50 pt-32 pb-20 text-center'>
-            <h1 className='text-4xl md:text-5xl font-bold text-grey-800'>Take Control of Your Expense with <span className='text-indigo-600'>SpendWise</span></h1>
-            <p className='mt-8 text-lg text-grey-600 max-w-5xl mx-auto'>Track, Analyze, and Manage your personal finance effortlessly.
-            Your smart expense companion for a stress-free future.
-            </p>
-            <div className='mt-8 flex justify-center space-x-9'>
-            <a href='/signup' className='bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700'>Get Started</a>
-            <a href='#features' className='border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-100'>Learn More</a>
-            </div>
-        </section>
+          {/* Desktop navlinks */}
+          <nav className="space-x-9 text-lg font-semibold hidden md:flex">
+            <a href="#" className="hover:text-indigo-600 transition mt-3">
+              Home
+            </a>
+            <a href="#features" className="hover:text-indigo-600 transition mt-3">
+              Features
+            </a>
+            <a
+              onClick={() => navigate("/login")}
+              className="hover:text-indigo-600 transition cursor-pointer mt-3"
+            >
+              Login
+            </a>
+            <a
+              onClick={() => navigate("/signup")}
+              className="border-2 border-black px-4 py-2 rounded-lg hover:border-indigo-600 hover:text-white hover:bg-indigo-600 transition cursor-pointer"
+            >
+              Sign Up
+            </a>
+          </nav>
 
+          {/* Hamburger button (only on mobile) */}
+          <button
+            className="md:hidden text-2xl focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? "✖" : "☰"}
+          </button>
+        </div>
 
+        {/* Mobile navlinks */}
+        {isOpen && (
+          <div className="md:hidden flex flex-col space-y-2 mt-2 bg-indigo-50 px-6 py-4 shadow-md">
+            <a href="#" className="hover:text-indigo-600 transition">
+              Home
+            </a>
+            <a href="#features" className="hover:text-indigo-600 transition">
+              Features
+            </a>
+            <button
+              onClick={() => {
+                navigate("/login")
+                setIsOpen(false)
+              }}
+              className="hover:text-indigo-600 text-left"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => {
+                navigate("/signup")
+                setIsOpen(false)
+              }}
+              className="border-2 border-black px-4 py-2 rounded-lg hover:border-indigo-600 hover:text-white hover:bg-indigo-600 transition text-left"
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
+      </header>
 
-        {/* Features section */}
+      {/* Hero section */}
+      <section className="bg-gray-50 pt-32 pb-20 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-grey-800">
+          Take Control of Your Expense with{" "}
+          <span className="text-indigo-600">SpendWise</span>
+        </h1>
+        <p className="mt-8 text-lg text-grey-600 max-w-5xl mx-auto">
+          Track, Analyze, and Manage your personal finance effortlessly. Your
+          smart expense companion for a stress-free future.
+        </p>
+        <div className="mt-8 flex justify-center space-x-9">
+          <a
+            href="/signup"
+            className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition"
+          >
+            Get Started
+          </a>
+          <a
+            href="#features"
+            className="border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-100 transition"
+          >
+            Learn More
+          </a>
+        </div>
+      </section>
+
+      {/* Features, How it works, CTA, Footer (unchanged) */}
+      {/* Features section */}
         <section id='features' className='bg-white py-15'>
             <div className='max-w-7xl mx-auto px-6 text-center'>
             <h className='text-3xl md:text-4xl font-bold text-gray-800'>Powerful Features to Manage Your Money</h>
@@ -116,9 +189,10 @@ export const Home = () => {
 
 
 
-
-        {/* Footer */}
-        <Footer/>
+      
+      <Footer />
     </div>
-    )
+  )
 }
+
+
