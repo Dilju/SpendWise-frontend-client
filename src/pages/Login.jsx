@@ -16,7 +16,7 @@ export const Login = () =>  {
         setLoading(true)
 
         try{
-            const res = await API.post("http://localhost:3050/auth/login", {email, password})
+            const res = await API.post("/auth/login", {email, password})
 
             //store token in local storage
             localStorage.setItem("token", res.data.token)
