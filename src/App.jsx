@@ -7,6 +7,8 @@ import { Expenses } from './pages/Expenses'
 import { Reports } from './pages/Reports'
 import { Profile } from './pages/Profile'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { ForgotPassword } from './pages/ForgotPassword'
+import { ResetPassword } from './pages/ResetPassword'
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        <Route path='/reset-password' element={<ResetPassword/>}/>
         <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
         <Route path='/expenses' element={<ProtectedRoute><Expenses/></ProtectedRoute>}/>
         <Route path='/reports' element={<ProtectedRoute><Reports/></ProtectedRoute>}/>

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { API } from "../utils/api"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { validateEmail } from "../utils/validateEmail"
 
 export const Login = () =>  {
@@ -61,6 +61,10 @@ export const Login = () =>  {
                           onChange={(e) => setPassword(e.target.value)}
                           required
                         />
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                        <Link href="/forgot-password" className="text-sm text-indigo-600 hover:underline">Forgot Password?</Link>
                     </div>
 
                     {error && <p className="text-red-500 text-sm">{error}</p>}
