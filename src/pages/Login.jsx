@@ -64,7 +64,7 @@ export const Login = () =>  {
                     </div>
 
                     <div className="flex justify-between items-center">
-                        <Link href="/forgot-password" className="text-sm text-indigo-600 hover:underline">Forgot Password?</Link>
+                        <a href="/forgot-password" className="text-sm text-indigo-600 hover:underline">Forgot Password?</a>
                     </div>
 
                     {error && <p className="text-red-500 text-sm">{error}</p>}
