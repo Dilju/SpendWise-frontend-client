@@ -110,10 +110,10 @@ export const Profile = () => {
                                 <p className="font-semibold text-lg">{user.name}</p>
                             </div>
 
-                            {/* <div className="mb-4">
+                            <div className="mb-4">
                                 <p className="text-gray-600 text-sm">Email</p>
                                 <p className="font-semibold text-lg">{user.email}</p>
-                            </div> */}
+                            </div>
 
                             <div className="mb-4">
                                 <p className="text-gray-600 text-sm">Monthly Income</p>
