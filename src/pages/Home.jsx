@@ -21,7 +21,7 @@ export const Home = () => {
           </h1>
 
           {/* Desktop navlinks */}
-          <nav className="space-x-9 text-lg font-semibold hidden md:flex">
+          <nav className="space-x-9 text-lg font-light hidden md:flex">
             <a href="#" className="hover:text-indigo-600 transition mt-3">
               Home
             </a>
