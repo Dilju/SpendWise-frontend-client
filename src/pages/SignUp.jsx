@@ -1,17 +1,27 @@
 import { useState } from "react"
 import { API } from "../utils/api"
 import { useNavigate } from "react-router-dom"
+import { validateEmail } from "../utils/validateEmail"
 
 export const SignUp = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
 
     const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+
+        setError("")
+        // front end email validation
+        if(!validateEmail(email)){
+            setError("Please enter a valid email adress")
+            return
+        }
+
         setLoading(true)
 
         try{

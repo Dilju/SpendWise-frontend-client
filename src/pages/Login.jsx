@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { API } from "../utils/api"
 import { useNavigate } from "react-router-dom"
+import { validateEmail } from "../utils/validateEmail"
 
 
 
@@ -8,12 +9,22 @@ export const Login = () =>  {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
 
     const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setError("")
+
+        // front end email validation
+        if(!validateEmail(email)){
+            setError("Please enter a valid Email Address")
+            return
+        }
         setLoading(true)
+
+
 
         try{
             const res = await API.post("/auth/login", {email, password})
@@ -22,7 +33,6 @@ export const Login = () =>  {
             localStorage.setItem("token", res.data.token)
 
             // alert("Login sucessful!")
-               
             navigate("/dashboard")
         } catch(err){
             console.error(err);
