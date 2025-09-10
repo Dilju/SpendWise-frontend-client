@@ -16,7 +16,7 @@ export const Profile = () => {
                 setUser(res.data)
                 setFormData({
                     name: res.data.name,
-                    email: res.data.email,
+                    // email: res.data.email,
                     monthlyIncome: res.data.monthlyIncome || 0
                 })
             } catch (err) {
@@ -66,7 +66,7 @@ export const Profile = () => {
                                 />
                             </div>
 
-                            <div className="mb-4">
+                            {/* <div className="mb-4">
                                 <label className="text-gray-600 text-sm">Email</label>
                                 <input 
                                     type="email"
@@ -75,7 +75,7 @@ export const Profile = () => {
                                     onChange={handleChange}
                                     className="w-full border px-3 py-2 rounded-lg"
                                 />
-                            </div>
+                            </div> */}
 
                             <div className="mb-4">
                                 <label className="text-gray-600 text-sm">Monthly Income</label>
@@ -110,10 +110,10 @@ export const Profile = () => {
                                 <p className="font-semibold text-lg">{user.name}</p>
                             </div>
 
-                            <div className="mb-4">
+                            {/* <div className="mb-4">
                                 <p className="text-gray-600 text-sm">Email</p>
                                 <p className="font-semibold text-lg">{user.email}</p>
-                            </div>
+                            </div> */}
 
                             <div className="mb-4">
                                 <p className="text-gray-600 text-sm">Monthly Income</p>
