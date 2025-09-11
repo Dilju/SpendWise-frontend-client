@@ -37,19 +37,20 @@ export const Expenses = () => {
 
   // add new expense
   const handleAddExpense = async (expense) => {
-    try {
-      const res = await API.post("/api/expenses", expense)
-      const newList = [...expenses, res.data.expense].sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt))
-      setExpenses(newList)
-      setAllExpenses(newList)
-      setIsModalOpen(false)
-      await fetchExpenses()
-      toast.success("Expense added successfully")
-    } catch (error) {
-      console.error(error)
-      toast.error("Failed to add expense")
-    }
+  try {
+    const res = await API.post("/api/expenses", expense)
+    const newList = [...expenses, res.data.expense].sort(
+      (a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt)
+    )
+    setExpenses(newList)
+    setAllExpenses(newList)
+    setIsModalOpen(false)
+    toast.success("Expense added successfully")
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to add expense")
   }
+}
 
   // delete expense
   const handleDeleteExpense = async (id) => {
@@ -99,23 +100,23 @@ export const Expenses = () => {
 
   // update expense
   const handleUpdateExpense = async (id, updatedExpense) => {
-    try {
-      const res = await API.put(`/api/expenses/${id}`, updatedExpense)
-      const updated = res.data.expense
-      const newList = expenses.map(exp => exp._id === id ? updated : exp)
-        .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt))
-      setExpenses(newList)
-      setAllExpenses(newList)
+  try {
+    const res = await API.put(`/api/expenses/${id}`, updatedExpense)
+    const updated = res.data.expense
+    const newList = expenses
+      .map(exp => exp._id === id ? updated : exp)
+      .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt))
+    setExpenses(newList)
+    setAllExpenses(newList)
 
-      setEditingExpense(null)
-      setIsModalOpen(false)
-      await fetchExpenses()
-      toast.success("Expense updated successfully")
-    } catch (error) {
-      console.error(error)
-      toast.error("Failed to update expense")
-    }
+    setEditingExpense(null)
+    setIsModalOpen(false)
+    toast.success("Expense updated successfully")
+  } catch (error) {
+    console.error(error)
+    toast.error("Failed to update expense")
   }
+}
 
 
 

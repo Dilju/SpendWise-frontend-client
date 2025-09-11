@@ -6,6 +6,13 @@ export const Table = ({ expenses = [] }) => {
             </div>
         )
     }
+
+     // ✅ Sort by date (newest first)
+    const sortedExpenses = [...expenses].sort((a, b) => {
+        const dateA = new Date(a.date || a.createdAt).getTime()
+        const dateB = new Date(b.date || b.createdAt).getTime()
+        return dateB - dateA // newest first
+    })
     
     return (
         <table className="w-full text-left border-collapse bg-white mt-5 rounded-lg shadow-lg">
