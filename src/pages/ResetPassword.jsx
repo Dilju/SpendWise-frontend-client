@@ -17,7 +17,7 @@ export const ResetPassword = () => {
             setMessage(res.data.message)
             setTimeout(() => navigate("/login"), 2000)
         } catch(err){   
-            setMessage(err.response?.data?.message || "Something went wrong")
+            setMessage(err.response?.data?.message || "Something went wrong");
         }
     }
     return(
