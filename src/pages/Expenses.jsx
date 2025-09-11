@@ -145,13 +145,13 @@ export const Expenses = () => {
     <div className="min-h-screen bg-gray-100">
       <Navbar />
 
-      <div className="pt-24 p-6 max-w-7xl mx-auto">
+      <div className="pt-20 px-3 sm:px-6 lg:px-12 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800">Expenses</h2>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+          <h2 className="text-2xl sm:text-2xl font-bold text-gray-800">Expenses</h2>
           <button
             onClick={() => {setEditingExpense(null); setIsModalOpen(true)}}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 hover:shadow-lg"
+            className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700 hover:shadow-lg w-full sm:w-auto"
           >
             + Add Expense
           </button>
@@ -167,14 +167,23 @@ export const Expenses = () => {
         ) : (
           <>
             {/* Expense Filters */}
-            <ExpenseFilters onApply={handleFilterExpenses} onReset={handleResetFilters}/>
-            <ExpenseSummary expenses={expenses} />
-            <ExpenseTable 
-              expenses={expenses} 
-              onDelete={handleDeleteExpense}
-              // onUpdate={handleUpdateExpense}
-              onEdit={handleEditClick}
+            <ExpenseFilters 
+              onApply={handleFilterExpenses} 
+              onReset={handleResetFilters}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
             />
+            <ExpenseSummary 
+              expenses={expenses} 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6"
+            />
+            <div className="overflow-x-auto">
+              <ExpenseTable 
+                expenses={expenses} 
+                onDelete={handleDeleteExpense}
+                // onUpdate={handleUpdateExpense}
+                onEdit={handleEditClick}
+              />
+            </div>
           </>
         )}
       </div>
