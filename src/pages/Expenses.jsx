@@ -5,6 +5,7 @@ import { ExpenseTable } from "../components/expenses/ExpenseTable"
 import { Navbar } from "../components/Navbar"
 import { useEffect, useState } from "react"
 import { API } from "../utils/api"
+import toast,{ Toaster } from "react-hot-toast"
 // import { searchForWorkspaceRoot } from "vite"
 
 export const Expenses = () => {
@@ -24,7 +25,7 @@ export const Expenses = () => {
       setAllExpenses(sorted)
     } catch (error) {
       console.error(error)
-      alert("Failed to fetch expenses")
+      toast.error("Failed to fetch expenses")
     } finally {
       setLoading(false)
     }
@@ -42,24 +43,51 @@ export const Expenses = () => {
       setExpenses(newList)
       setAllExpenses(newList)
       setIsModalOpen(false)
-      alert("Expense added successfully")
+      await fetchExpenses()
+      toast.success("Expense added successfully")
     } catch (error) {
       console.error(error)
-      alert("Failed to add expense")
+      toast.error("Failed to add expense")
     }
   }
 
   // delete expense
   const handleDeleteExpense = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this expense?")) return
+    const confirm = await new Promise((resolve) => {
+      toast(
+        (t) => (
+          <div className="flex flex-col gap-2 p-2">
+            <span>Are you sure you want to delete this expense?</span>
+            <div className="flex justify-end gap-2 mt-2">
+              <button
+                className="bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
+                onClick={() => { resolve(true); toast.dismiss(t.id)}}
+                >Yes
+              </button>
+
+              <button
+                className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400"
+                onClick={() => {resolve(false); toast.dismiss(t.id)}}
+              >No</button>
+            </div>
+          </div>
+        ),
+        {duration: Infinity}
+      )
+    })
+    
+    
+    
+    if (!confirm) return
 
     try {
       await API.delete(`/api/expenses/${id}`)
       setExpenses(prev => prev.filter(exp => exp._id !== id))
       setAllExpenses(prev => prev.filter(exp => exp._id !== id))
+      toast.success("Expense deleted successfully")
     } catch (error) {
       console.error(error)
-      alert("Failed to delete expense")
+      toast.error("Failed to delete expense")
     }
   }
 
@@ -73,17 +101,19 @@ export const Expenses = () => {
   const handleUpdateExpense = async (id, updatedExpense) => {
     try {
       const res = await API.put(`/api/expenses/${id}`, updatedExpense)
-      const newList = expenses.map(exp => exp._id === id ? res.data.expense : exp)
+      const updated = res.data.expense
+      const newList = expenses.map(exp => exp._id === id ? updated : exp)
         .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt))
       setExpenses(newList)
       setAllExpenses(newList)
 
       setEditingExpense(null)
       setIsModalOpen(false)
-      alert("Expense updated successfully")
+      await fetchExpenses()
+      toast.success("Expense updated successfully")
     } catch (error) {
       console.error(error)
-      alert("Failed to update expense")
+      toast.error("Failed to update expense")
     }
   }
 
@@ -127,14 +157,17 @@ export const Expenses = () => {
           </button>
         </div>
 
-        {/* Expense Filters */}
-        <ExpenseFilters onApply={handleFilterExpenses} onReset={handleResetFilters}/>
+        
 
         {/* Loading / Data */}
         {loading ? (
-          <p className="text-center text-gray-500">Loading expenses...</p>
+          <div className="flex justify-center items-center py-20">
+            <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+          </div>
         ) : (
           <>
+            {/* Expense Filters */}
+            <ExpenseFilters onApply={handleFilterExpenses} onReset={handleResetFilters}/>
             <ExpenseSummary expenses={expenses} />
             <ExpenseTable 
               expenses={expenses} 

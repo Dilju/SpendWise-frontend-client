@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navbar } from "../components/Navbar"
 import { API } from "../utils/api"
+import toast, {Toaster} from "react-hot-toast"
 
 export const Profile = () => {
     const [user, setUser] = useState(null)
@@ -29,20 +30,56 @@ export const Profile = () => {
     }, [])
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+        const { name, value } = e.target;
+
+        if (name === "monthlyIncome") {
+            // allow empty string to let user edit freely
+            if (value === "") {
+                setFormData({ ...formData, [name]: "" });
+                return;
+            }
+
+            // allow only numbers (including 0), no immediate conversion
+            if (/^\d*\.?\d*$/.test(value)) {
+                setFormData({ ...formData, [name]: value });
+            }
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
+    };
+
+
 
     const handleSave = async () => {
-        try {
-            const res = await API.put("/auth/me", formData)
-            setUser(res.data.user)
-            setEditMode(false)
-        } catch (err) {
-            alert(err.response?.data?.message || "Update failed")
+        const monthlyIncome = Number(formData.monthlyIncome);
+        if (isNaN(monthlyIncome) || monthlyIncome < 0) {
+            toast.error("Please enter a valid non-negative number for Monthly income");
+            return;
         }
-    }
 
-    if (loading) return <p className="text-center pt-24">Loading ...</p>
+        const payload = {
+            ...formData,
+            monthlyIncome
+        };
+
+        try {
+            const res = await API.put("/auth/me", payload);
+            setUser(res.data.user);
+            setEditMode(false);
+            toast.success("Profile updated successfully!");
+        } catch (err) {
+            toast.error(err.response?.data?.message || "Update failed");
+        }
+}
+ 
+
+if (loading) {
+        return (
+            <div className="min-h-screen flex justify-center items-center py-20">
+                <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        )
+    }
     if (error) return <p className="text-center pt-24 text-red-500">{error}</p>
 
     return (
@@ -85,6 +122,9 @@ export const Profile = () => {
                                     value={formData.monthlyIncome}
                                     onChange={handleChange}
                                     className="w-full border px-3 py-2 rounded-lg"
+                                    // min="0"
+                                    step="0.01"
+                                    required
                                 />
                             </div>
 

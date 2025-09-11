@@ -13,7 +13,7 @@ export const ExpenseForm = ({ onClose, onSave, initialData }) => {
     useEffect(() => {
         if(initialData){
             setFormData({
-                date: initialData.date || "",
+                date: initialData.date ? new Date(initialData.date).toISOString().split("T")[0] : "",
                 category: initialData.category || "",
                 title: initialData.title || "",
                 amount: initialData.amount || "",
@@ -89,6 +89,8 @@ export const ExpenseForm = ({ onClose, onSave, initialData }) => {
                         placeholder="Amount" 
                         className="border w-full px-3 py-2 rounded-lg"
                         onChange={handleChange}
+                        min="0"
+                        step="0.01"
                         required
                     />
 

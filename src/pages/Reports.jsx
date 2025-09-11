@@ -56,26 +56,32 @@ export const Reports = () => {
     return(
         <div className="min-h-screen bg-gray-100">
             <Navbar/>
-
             <div className="pt-24 p-6 max-w-7xl mx-auto">
                 {/* Header */}
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">Reports</h3>
 
-                {/* Report Filters */}
-                <ReportFilter onFilter={handleFilter} categories={categories}/>
+                {loading ? (
+                    <div className="flex justify-center items-center py-20">
+                        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                ) : (
+                    <>
+                        {/* Report Filters */}
+                        <ReportFilter onFilter={handleFilter} categories={categories}/>
 
-                {/* Report summary */}
-                <ReportSummary expenses = {filteredExpenses}/>
+                        {/* Report summary */}
+                        <ReportSummary expenses = {filteredExpenses}/>
 
-                {/* Report Charts */}
-                <ReportCharts expenses={filteredExpenses}/>
+                        {/* Report Charts */}
+                        <ReportCharts expenses={filteredExpenses}/>
 
-                {/* Report Export */}
-                <ReportExportBtn expenses={filteredExpenses}/>
+                        {/* Report Export */}
+                        <ReportExportBtn expenses={filteredExpenses}/>
 
-                {/* Table */}
-                <Table expenses={filteredExpenses}/>
-
+                        {/* Table */}
+                        <Table expenses={filteredExpenses}/>
+                    </>
+                )}
             </div>
         </div>
     )

@@ -20,8 +20,19 @@ export const Table = ({ expenses = [] }) => {
             <tbody>
                 {expenses.map((exp, index) => (
                     <tr key={index} className="border-b hover:bg-gray-50">
-                        <td className="px-4 py-2"> {exp?.date? new Date(exp.date).toLocaleDateString()
-                                :exp?.createdAt? new Date(exp.createdAt).toLocaleDateString():"N/A"}</td>
+                        <td className="px-4 py-2"> {exp?.date
+                        ? new Date(exp.date).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "2-digit"
+                        })
+                        :exp?.createdAt
+                        ? new Date(exp.createdAt).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "2-digit"
+                        })
+                        :"N/A"}</td>
                         <td className="px-4 py-2">{exp.category}</td>
                         <td className="px-4 py-2 font-semibold">₹{exp.amount}</td>
                         <td className="px-4 py-2">{exp.notes || "-"}</td>

@@ -40,7 +40,13 @@ export const Dashboard = () => {
   const monthlyIncome = user?.monthlyIncome || 0
   const balance = monthlyIncome - totalSpent
 
-  if (loading) return <p className="text-center mt-10">Loading Dashboard ...</p>
+  if (loading){
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
+  }
 
   const latestExpenses = [...expenses]
     .sort((a, b) => new Date(b.date || b.createdAt) - new Date(a.date || a.createdAt))
@@ -67,8 +73,8 @@ export const Dashboard = () => {
             <h4 className="font-bold text-indigo-700 mb-2 text-center text-2xl">💡 50/30/20 Rule</h4>
             <p className="text-sm text-gray-800 pl-5">
               <span className="font-bold text-lg text-gray-700">Allocate your income wisely;</span>
-              <br /> • <span className="font-bold text-indigo-800 text-lg">50%</span> for Needs (food, rent, healthcare)
-              <br /> • <span className="font-bold text-indigo-800 text-lg">30%</span> for Wants (shopping, entertainment)
+              <br /> • <span className="font-bold text-indigo-800 text-lg">50%</span> for Needs (Food, Rent, Healthcare)
+              <br /> • <span className="font-bold text-indigo-800 text-lg">30%</span> for Wants (Shopping, Entertainment)
               <br /> • <span className="font-bold text-indigo-800 text-lg">20%</span> for Savings & Investments
             </p>
           </div>

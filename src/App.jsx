@@ -9,22 +9,28 @@ import { Profile } from './pages/Profile'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { ForgotPassword } from './pages/ForgotPassword'
 import { ResetPassword } from './pages/ResetPassword'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/forgot-password' element={<ForgotPassword/>}/>
-        <Route path='/reset-password/:token' element={<ResetPassword/>}/>
-        <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
-        <Route path='/expenses' element={<ProtectedRoute><Expenses/></ProtectedRoute>}/>
-        <Route path='/reports' element={<ProtectedRoute><Reports/></ProtectedRoute>}/>
-        <Route path='/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
-      </Routes>
-    </Router>
+    <>
+      {/* toaser for all notifications */}
+      <Toaster position="top-center" />
+
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/forgot-password' element={<ForgotPassword/>}/>
+          <Route path='/reset-password/:token' element={<ResetPassword/>}/>
+          <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+          <Route path='/expenses' element={<ProtectedRoute><Expenses/></ProtectedRoute>}/>
+          <Route path='/reports' element={<ProtectedRoute><Reports/></ProtectedRoute>}/>
+          <Route path='/profile' element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+        </Routes>
+      </Router>
+    </>
   )
 }
 

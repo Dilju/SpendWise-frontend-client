@@ -112,7 +112,7 @@ export const Home = () => {
       {/* Features section */}
         <section id='features' className='bg-white py-15'>
             <div className='max-w-7xl mx-auto px-6 text-center'>
-            <h className='text-3xl md:text-4xl font-bold text-gray-800'>Powerful Features to Manage Your Money</h>
+            <h2 className='text-3xl md:text-4xl font-bold text-gray-800'>Powerful Features to Manage Your Money</h2>
             <p className='mt-4 text-gray-700 max-w-2xl mx-auto'><span className='font-bold'>SpendWise</span> gives you the right tools to stay in control of your expenses and savings.</p>
 
             {/* Features card grid */}

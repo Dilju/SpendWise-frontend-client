@@ -13,7 +13,7 @@ export const ForgotPassword = () => {
 
         try{
             const res = await API.post("/auth/forgot-password", {email})
-            setMessage(`${res.data.message} (Check email or use this link: ${res.data.resetUrl})`)
+            setMessage(`${res.data.message}`)
         } catch(err){
             setMessage( err.response?.data?.message || "Something went wrong")
         } finally{
@@ -37,13 +37,16 @@ export const ForgotPassword = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-indigo-600 text-white py-2 rounded-lg shadow hover:bg-indigo-700 transition hover:shadow-lg"
+                        className="w-full bg-indigo-600 text-white py-2 rounded-lg shadow hover:bg-indigo-700 transition hover:shadow-lg flex justify-center items-center gap-2"
                         disabled={loading}
                     >
+                        {loading && (
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        )}
                         {loading ? "Sending..." : "Send the reset link"}
                     </button>
                 </form>
-                {message && <p className="mt-4 text-sm text-gray-700">{message}</p>}
+                <p className="text-center mt-3 animate-pulse">{message}</p>
             </div>
         </div>
     ) 
