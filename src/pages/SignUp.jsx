@@ -2,6 +2,7 @@ import { useState } from "react"
 import { API } from "../utils/api"
 import { useNavigate } from "react-router-dom"
 import { validateEmail } from "../utils/validateEmail"
+import { Eye, EyeOff } from "lucide-react"   // ✅ eye toggle icons
 
 export const SignUp = () => {
     const [name, setName] = useState("")
@@ -44,6 +45,7 @@ export const SignUp = () => {
                 <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">Create an Account</h2>
 
                 <form className="space-y-5" onSubmit={handleSubmit}>
+                    {/* Full Name */}
                     <div> 
                         <label className="block text-gray-700 font-bold mb-1">Full Name</label>
                         <input 
@@ -55,6 +57,7 @@ export const SignUp = () => {
                         />
                     </div>
 
+                    {/* Email */}
                     <div>
                         <label className="block text-gray-700 font-bold mb-1">Email</label>
                         <input 
@@ -66,6 +69,7 @@ export const SignUp = () => {
                         />
                     </div>
 
+                    {/* Password */}
                     <div className="relative">
                         <label className="block text-gray-700 font-bold mb-1">Password</label>
                         <input 
@@ -79,12 +83,16 @@ export const SignUp = () => {
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
-                        >{showPassword ? "🙈" : "👁️"}</button>
+                            className="absolute right-3 top-10 text-gray-500 hover:text-gray-700"
+                        >
+                            {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
+                        </button>
                     </div>
 
+                    {/* Error */}
                     {error && <p className="text-red-500 text-sm">{error}</p>}
 
+                    {/* Submit */}
                     <button 
                         type="submit" 
                         className="border w-full py-2 rounded-lg bg-indigo-500 text-white font-bold hover:bg-indigo-700 transition flex justify-center items-center gap-2"
@@ -95,6 +103,7 @@ export const SignUp = () => {
                         {loading ? "Signing Up..." : "Sign Up"}
                     </button>
 
+                    {/* Link to login */}
                     <p className="text-center text-gray-600 text-sm mt-5">
                       Already have an account?{" "}
                       <a href="/login" className="text-indigo-600 font-medium hover:underline transition">Log In</a>

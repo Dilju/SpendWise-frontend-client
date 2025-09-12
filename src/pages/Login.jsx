@@ -2,6 +2,7 @@ import { useState } from "react"
 import { API } from "../utils/api"
 import { useNavigate } from "react-router-dom"
 import { validateEmail } from "../utils/validateEmail"
+import { Eye, EyeOff } from "lucide-react"   // ✅ Eye toggle icons
 
 export const Login = () =>  {
     const [email, setEmail] = useState("")
@@ -9,7 +10,6 @@ export const Login = () =>  {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")   //  to show error msg
     const [showPassword, setShowPassword] = useState(false)
-
 
     const navigate = useNavigate()
 
@@ -43,6 +43,7 @@ export const Login = () =>  {
                 <h2 className="text-center text-3xl font-bold text-indigo-600 mb-6">Welcome Back</h2>
 
                 <form className="space-y-5" onSubmit={handleSubmit}>
+                    {/* Email */}
                     <div>
                         <label className="block font-bold text-gray-700 mb-1">Email</label>
                         <input 
@@ -54,6 +55,7 @@ export const Login = () =>  {
                         />
                     </div>
 
+                    {/* Password */}
                     <div className="relative">
                         <label className="block font-bold text-gray-700 mb-1">Password</label>
                         <input 
@@ -67,19 +69,22 @@ export const Login = () =>  {
                         
                         <button
                             type="button"
-                            className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
+                            className="absolute right-3 top-10 text-gray-500 hover:text-gray-700"
                             onClick={() => setShowPassword(!showPassword)}
                         >
-                            {showPassword ? "🙈" : "👁️"}
+                            {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
                         </button>
                     </div>
 
+                    {/* Forgot password */}
                     <div className="flex justify-between items-center">
                         <a href="/forgot-password" className="text-sm text-indigo-600 hover:underline">Forgot Password?</a>
                     </div>
 
+                    {/* Error */}
                     {error && <p className="text-red-500 text-sm">{error}</p>}
 
+                    {/* Submit */}
                     <button 
                         type="submit"
                         disabled={loading}
