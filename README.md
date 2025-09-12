@@ -1,12 +1,39 @@
-# React + Vite
+# SpendWise – Personal Expense Tracker  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN application that helps users track, manage, and analyze their personal expenses with a clean and responsive dashboard.  
 
-Currently, two official plugins are available:
+🚀 **Live Demo:** [SpendWise App](https://spend-wise-frontend-client.vercel.app/)  
+📦 **Backend API:** [SpendWise API](https://spendwise-server-1qzg.onrender.com)  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features  
+- User authentication (JWT-based login & registration)  
+- Add, edit, and delete daily expenses  
+- Categorized expense reports with analytics  
+- Secure **Forgot Password** functionality using Nodemailer  
+- Responsive dashboard UI (desktop & mobile)  
+- Cloud-hosted database with **MongoDB Atlas**  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack  
+**Frontend:** React.js, Vite, Tailwind CSS  
+**Backend:** Node.js, Express.js  
+**Database:** MongoDB Atlas  
+**Authentication:** JWT  
+**Email Service:** Nodemailer  
+**Deployment:** Vercel (Frontend), Render (Backend)  
+
+---
+
+## 📂 Project Setup  
+cd ../client
+npm install
+npm run dev
+
+
+### Clone the repository  
+```bash
+git clone https://github.com/Dilju/SpendWise-frontend-client
+cd spendwise
